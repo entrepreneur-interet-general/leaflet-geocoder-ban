@@ -1,0 +1,66 @@
+.leaflet-control-geocoder-ban {
+    border-radius: 4px;
+    background: white;
+    min-width: 26px;
+    min-height: 26px;
+}
+
+.leaflet-control-geocoder-ban-icon {
+    border-radius: 4px;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background-color: white;
+    background-image: url(../images/geocoder.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.leaflet-control-geocoder-ban-form {
+    display: none;
+    vertical-align: middle;
+}
+
+.leaflet-control-geocoder-ban-expanded .leaflet-control-geocoder-ban-form {
+    display: inline-block;
+}
+
+.leaflet-control-geocoder-ban-form input {
+    font-size: 120%;
+    border: 0;
+    background-color: transparent;
+    width: 246px;
+}
+
+.leaflet-control-geocoder-ban-alternatives {
+    display: block;
+    width: inherit;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaflet-control-geocoder-ban-alternatives-minimized {
+    display: none;
+    height: 0;
+}
+
+.leaflet-control-geocoder-ban .leaflet-control-geocoder-ban-alternatives a {
+    width: inherit;
+    height: inherit;
+    line-height: inherit;
+    background-color: transparent;
+    text-align: left;
+    padding: 3px 0 3px 6px;
+}
+
+.leaflet-control-geocoder-ban .leaflet-control-geocoder-ban-alternatives li {
+    width: inherit;
+    height: inherit;
+    cursor: pointer;
+    border-top: 1px solid #d0d0d0;
+}
+
+.leaflet-control-geocoder-ban-selected {
+    background-color: rgba(0,0,255,0.2);
+}
