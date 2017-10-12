@@ -39,7 +39,7 @@ const factory = function factoryFunc (L) {
       var input
 
       this.map = map
-      map.on('click', this.collapse, this)
+      map.on('click', this.collapseHack, this)
 
       icon.innerHTML = '&nbsp;'
       icon.type = 'button'
@@ -84,6 +84,12 @@ const factory = function factoryFunc (L) {
       L.DomUtil.addClass(this.alts, 'leaflet-control-geocoder-ban-alternatives-minimized')
       this.input.blur()
     },
+    collapseHack: function (e) {
+      // leaflet bug (see #5507) before v1.1.0 that converted enter keypress to click.
+      if (e.originalEvent === 'click') {
+        this.collapse()
+      }
+    },
     moveSelection: function (direction) {
       var s = document.getElementsByClassName('leaflet-control-geocoder-ban-selected')
       var el
@@ -108,6 +114,7 @@ const factory = function factoryFunc (L) {
         case 27:
           // escape
           this.collapse()
+          L.DomEvent.preventDefault(e)
           break
         case 38:
           // down
@@ -125,6 +132,7 @@ const factory = function factoryFunc (L) {
           if (s.length) {
             this.geocodeResult(s[0].geocodedFeatures)
           }
+          L.DomEvent.preventDefault(e)
           break
         default:
           if (this.input.value) {
@@ -140,6 +148,7 @@ const factory = function factoryFunc (L) {
           } else {
             this.clearResults()
           }
+          L.DomEvent.preventDefault(e)
       }
     },
     clearResults () {
