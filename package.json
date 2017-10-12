@@ -1,0 +1,26 @@
+{
+  "name": "leaflet-geocoder-ban",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eig-2017/leaflet-geocoder-ban.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eig-2017/leaflet-geocoder-ban/issues"
+  },
+  "homepage": "https://github.com/eig-2017/leaflet-geocoder-ban#readme",
+  "dependencies": {
+    "leaflet": "^1.0.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
