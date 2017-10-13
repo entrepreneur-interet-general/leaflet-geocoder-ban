@@ -37,26 +37,18 @@
       // basic way :
       var geocoder = L.geocoderBAN({ collapsed: false }).addTo(map)
 
-      
       //if you want to write your own actions when a result is selected :
-      
       /*
-      // set defaultMarkgeocode to false
-      var geocoder = L.geocoderBAN({ collapsed: false, defaultMarkgeocode: false }).addTo(map)
+      geocoder.markGeocode = function (feature) {
+        var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
+        map.setView(latlng, 14)
 
-      // and write your own function:
-      geocoder.on('markgeocode', function (result) {
-          var feature = result.geocode
-          var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
-          map.setView(latlng, 14)
-
-          var popup = L.popup()
-            .setLatLng(latlng)
-            .setContent(feature.properties.label)
-            .openOn(map)
-      })
+        var popup = L.popup()
+        .setLatLng(latlng)
+        .setContent(feature.properties.label)
+        .openOn(map)
+      }
       */
-
     </script>
   </body>
   </html>

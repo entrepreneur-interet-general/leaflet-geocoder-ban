@@ -195,14 +195,13 @@ const factory = function factoryFunc (L) {
     },
     geocodeResult: function (feature) {
       this.collapse()
-      this.fire('markgeocode', {geocode: feature})
+      this.markGeocode(feature)
     },
-    markGeocode: function (result) {
-      var f = result.geocode
-      var latlng = [f.geometry.coordinates[1], f.geometry.coordinates[0]]
+    markGeocode: function (feature) {
+      var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
       this.map.setView(latlng, 14)
       this.geocodeMarker = new L.Marker(latlng)
-        .bindPopup(f.properties.label)
+        .bindPopup(feature.properties.label)
         .addTo(this.map)
         .openPopup()
     }
