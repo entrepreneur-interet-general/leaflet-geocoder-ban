@@ -21,15 +21,15 @@ Then, load the two leaflet-geocoder-ban files located in the src folder :
 <link rel="stylesheet" href="leaflet-geocoder-ban.css">
 ```
 
-In your javascript code, create a Leaflet map as usual:
+In your javascript code, create a Leaflet map:
 ```javascript
 var map = L.map('mapid').setView([45.853459, 2.349312], 6)
 
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(map)
+attribution: 'map attribution'}).addTo(map)
 ```
 
-And add:
+And add the geocoder:
 ```javascript
 var geocoder = L.geocoderBAN().addTo(map)
 ```
@@ -37,4 +37,40 @@ var geocoder = L.geocoderBAN().addTo(map)
 # Options
 You can pass some options to the geocoderBAN() function:
 
-work in progress :)
+| option                     | type        | default      | description
+|----------------------------|-------------|--------------|-----------------|
+| position                   | string      | 'topleft'    | Control [position](http://leafletjs.com/reference.html#control-positions) |
+| placeholder                | string      | 'adresse'    | Placeholder of the text input |
+| resultsNumber              | integer     |  5           | Default number of address results suggested |
+| collapsed                  | boolean     | true         | Initial state of the control, collapsed or expanded |
+| serviceUrl                 | string      | 'https://api-adresse.data.gouv.fr/search/' | API of the url
+| minIntervalBetweenRequests |integer      | 250          | delay in milliseconds between two API calls made by the geocoder |
+
+## example
+
+```javascript
+var options = {
+  position: 'topright',
+  collapsed: 'false'
+}
+
+var geocoder = L.geocoderBAN(options).addTo(map)
+```
+
+## custom markgeocode function 
+When you select a result on the geocoder, it calls a default `markGeocode` function. If you want to call a custom function, override it. It receives as argument the result given by the BAN API as described [here](https://adresse.data.gouv.fr/api)
+
+```javascript
+var geocoder = L.geocoderBAN({ collapsed: true }).addTo(map)
+
+geocoder.markGeocode = function (feature) {
+  var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
+  map.setView(latlng, 14)
+
+  var popup = L.popup()
+    .setLatLng(latlng
+    .setContent(feature.properties.label)
+    .openOn(map)
+  }
+})
+```
