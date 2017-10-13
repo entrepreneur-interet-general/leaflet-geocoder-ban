@@ -7,13 +7,13 @@
   <title>Leaflet.BAN.geocoder demo</title>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
+  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
-  <script src="../src/leaflet.BAN.geocoder.js"></script>
-  <link rel="stylesheet" href="../src/leaflet.BAN.geocoder.css">
+  integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+  crossorigin=""></script>
+  <script src="../src/leaflet-geocoder-ban.js"></script>
+  <link rel="stylesheet" href="../src/leaflet-geocoder-ban.css">
 </head>
 <body>
   <style>
@@ -29,13 +29,34 @@
   <div id="mapid"></div>
 
   <script>
-      var map = L.map('mapid').setView([45.853459, 2.349312], 6);
+    var map = L.map('mapid').setView([45.853459, 2.349312], 6)
 
-      L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(map);
+    L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(map)
 
-      L.geocoderBAN({ position: 'topleft' }).addTo(map);
+      // basic way :
+      var geocoder = L.geocoderBAN({ collapsed: false }).addTo(map)
 
-  </script>
-</body>
-</html>
+      
+      //if you want to write your own actions when a result is selected :
+      
+      /*
+      // set defaultMarkgeocode to false
+      var geocoder = L.geocoderBAN({ collapsed: false, defaultMarkgeocode: false }).addTo(map)
+
+      // and write your own function:
+      geocoder.on('markgeocode', function (result) {
+          var feature = result.geocode
+          var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
+          map.setView(latlng, 14)
+
+          var popup = L.popup()
+            .setLatLng(latlng)
+            .setContent(feature.properties.label)
+            .openOn(map)
+      })
+      */
+
+    </script>
+  </body>
+  </html>
