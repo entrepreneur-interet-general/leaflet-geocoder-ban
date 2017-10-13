@@ -35,11 +35,11 @@ var geocoder = L.geocoderBAN().addTo(map)
 ```
 
 # Options
-You can pass some options to the geocoderBAN() function:
+You can pass some options to the `geocoderBAN()` function:
 
 | option                     | type        | default      | description
 |----------------------------|-------------|--------------|-----------------|
-| position                   | string      | 'topleft'    | Control [position](http://leafletjs.com/reference.html#control-positions) |
+| position                   | string      | 'topleft'    | Control [position](http://leafletjs.com/reference.html#control) |
 | placeholder                | string      | 'adresse'    | Placeholder of the text input |
 | resultsNumber              | integer     |  5           | Default number of address results suggested |
 | collapsed                  | boolean     | true         | Initial state of the control, collapsed or expanded |
