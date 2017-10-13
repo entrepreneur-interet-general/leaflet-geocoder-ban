@@ -15,14 +15,14 @@ or
 # Usage
 First, load the leaflet files as usual.
 
-Then, Load the two leaflet-geocoder-ban files located in the src folder :
+Then, load the two leaflet-geocoder-ban files located in the src folder :
 ```html
 <script src="leaflet-geocoder-ban.js"></script>
 <link rel="stylesheet" href="leaflet-geocoder-ban.css">
 ```
 
 In your javascript code, create a Leaflet map as usual:
-```
+```javascript
 var map = L.map('mapid').setView([45.853459, 2.349312], 6)
 
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
@@ -30,10 +30,11 @@ attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</
 ```
 
 And add:
-```
+```javascript
 var geocoder = L.geocoderBAN().addTo(map)
 ```
 
 # Options
 You can pass some options to the geocoderBAN() function:
 
+work in progress :)
