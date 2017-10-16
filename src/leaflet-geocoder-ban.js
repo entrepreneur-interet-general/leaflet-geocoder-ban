@@ -95,7 +95,7 @@ const factory = function factoryFunc (L) {
     },
     collapseHack: function (e) {
       // leaflet bug (see #5507) before v1.1.0 that converted enter keypress to click.
-      if (e.originalEvent === 'click') {
+      if (e.originalEvent instanceof MouseEvent) {
         this.collapse()
       }
     },
