@@ -41,7 +41,7 @@ You can pass some options to the `geocoderBAN()` function:
 |----------------------------|-------------|--------------|-----------------|
 | position                   | string      | 'topleft'    | Control [position](http://leafletjs.com/reference.html#control) |
 | placeholder                | string      | 'adresse'    | Placeholder of the text input |
-| resultsNumber              | integer     |  5           | Default number of address results suggested |
+| resultsNumber              | integer     |  7           | Default number of address results suggested |
 | collapsed                  | boolean     | true         | Initial state of the control, collapsed or expanded |
 | autofocus                  | boolean     | true         | If the initial state of the control is expanded, choose wether the input is autofocused on page load|
 | serviceUrl                 | string      | 'https://api-adresse.data.gouv.fr/search/' | API of the url

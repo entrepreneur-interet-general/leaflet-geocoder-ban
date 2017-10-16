@@ -21,7 +21,7 @@ const factory = function factoryFunc (L) {
     options: {
       position: 'topleft',
       placeholder: 'adresse',
-      resultsNumber: 5,
+      resultsNumber: 7,
       collapsed: true,
       serviceUrl: 'https://api-adresse.data.gouv.fr/search/',
       minIntervalBetweenRequests: 250,

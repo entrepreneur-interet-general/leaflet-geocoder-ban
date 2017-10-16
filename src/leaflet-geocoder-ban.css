@@ -44,9 +44,17 @@
 .leaflet-control-geocoder-ban-alternatives {
     display: block;
     width: inherit;
+    max-height: 400px;
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow: scroll;
+}
+
+@media screen and (max-width: 480px) {
+    .leaflet-control-geocoder-ban-alternatives {
+        max-height: 150px;
+    }
 }
 
 .leaflet-control-geocoder-ban-alternatives-minimized {
@@ -65,7 +73,6 @@
 
 .leaflet-control-geocoder-ban .leaflet-control-geocoder-ban-alternatives li {
     width: inherit;
-    height: inherit;
     cursor: pointer;
     border-top: 1px solid #d0d0d0;
 }
