@@ -26,6 +26,10 @@
     vertical-align: middle;
 }
 
+.leaflet-control-geocoder-ban-expanded {
+    margin-right: 10px;
+}
+
 .leaflet-control-geocoder-ban-expanded .leaflet-control-geocoder-ban-form {
     display: inline-block;
 }
@@ -56,7 +60,7 @@
     line-height: inherit;
     background-color: transparent;
     text-align: left;
-    padding: 3px 0 3px 6px;
+    padding: 3px 6px 3px 6px;
 }
 
 .leaflet-control-geocoder-ban .leaflet-control-geocoder-ban-alternatives li {
