@@ -25,7 +25,8 @@ const factory = function factoryFunc (L) {
       collapsed: true,
       serviceUrl: 'https://api-adresse.data.gouv.fr/search/',
       minIntervalBetweenRequests: 250,
-      defaultMarkgeocode: true
+      defaultMarkgeocode: true,
+      autofocus: true
     },
     includes: L.Evented.prototype || L.Mixin.Events,
     initialize: function (options) {
@@ -61,7 +62,12 @@ const factory = function factoryFunc (L) {
       L.DomEvent.disableScrollPropagation(container)
       L.DomEvent.disableClickPropagation(container)
 
-      if (!this.options.collapsed) { this.expand() }
+      if (!this.options.collapsed) {
+        this.expand()
+        if (this.options.autofocus) {
+          setTimeout(function () { input.focus() }, 250)
+        }
+      }
 
       return container
     },
