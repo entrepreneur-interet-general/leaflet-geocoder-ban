@@ -53,7 +53,10 @@ const factory = function factoryFunc (L) {
         className + '-alternatives ' + className + '-alternatives-minimized',
         container)
 
-      L.DomEvent.on(icon, 'click', this.toggle, this)
+      L.DomEvent.on(icon, 'click', function (e) {
+        this.toggle()
+        L.DomEvent.preventDefault(e)
+      }, this)
       L.DomEvent.addListener(input, 'keyup', this.keyup, this)
       if (this.options.defaultMarkgeocode) {
         this.on('markgeocode', this.markGeocode, this)
