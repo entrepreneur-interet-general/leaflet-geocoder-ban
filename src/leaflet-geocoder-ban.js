@@ -181,7 +181,7 @@ const factory = function factoryFunc (L) {
       var li = L.DomUtil.create('li', '')
       var a = L.DomUtil.create('a', '', li)
       li.setAttribute('data-result-index', index)
-      a.innerHTML = feature.properties.label
+      a.innerHTML = '<strong>' + feature.properties.label + '</strong>, ' + feature.properties.context
       li.geocodedFeatures = feature
       var clickHandler = function (e) {
         this.collapse()
