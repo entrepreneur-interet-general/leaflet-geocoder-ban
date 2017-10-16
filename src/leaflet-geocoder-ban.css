@@ -5,6 +5,11 @@
     min-height: 26px;
 }
 
+.leaflet-touch .leaflet-control-geocoder-ban {
+    min-width: 30px;
+    min-height: 30px;
+}
+
 .leaflet-control-geocoder-ban-icon {
     border-radius: 4px;
     width: 26px;
