@@ -32,6 +32,9 @@ const factory = function factoryFunc (L) {
     initialize: function (options) {
       L.Util.setOptions(this, options)
     },
+    onRemove: function (map) {
+      map.off('click', this.collapseHack, this)
+    },
     onAdd: function (map) {
       var className = 'leaflet-control-geocoder-ban'
       var container = this.container = L.DomUtil.create('div', className + ' leaflet-bar')
@@ -39,7 +42,6 @@ const factory = function factoryFunc (L) {
       var form = this.form = L.DomUtil.create('div', className + '-form', container)
       var input
 
-      this.map = map
       map.on('click', this.collapseHack, this)
 
       icon.innerHTML = '&nbsp;'
@@ -58,9 +60,6 @@ const factory = function factoryFunc (L) {
         L.DomEvent.preventDefault(e)
       }, this)
       L.DomEvent.addListener(input, 'keyup', this.keyup, this)
-      if (this.options.defaultMarkgeocode) {
-        this.on('markgeocode', this.markGeocode, this)
-      }
 
       L.DomEvent.disableScrollPropagation(container)
       L.DomEvent.disableClickPropagation(container)
@@ -71,11 +70,10 @@ const factory = function factoryFunc (L) {
           setTimeout(function () { input.focus() }, 250)
         }
       }
-
       return container
     },
     toggle: function () {
-      if (this.container.classList.contains('leaflet-control-geocoder-ban-expanded')) {
+      if (L.DomUtil.hasClass(this.container, 'leaflet-control-geocoder-ban-expanded')) {
         this.collapse()
       } else {
         this.expand()
@@ -84,7 +82,7 @@ const factory = function factoryFunc (L) {
     expand: function () {
       L.DomUtil.addClass(this.container, 'leaflet-control-geocoder-ban-expanded')
       if (this.geocodeMarker) {
-        this.map.removeLayer(this.geocodeMarker)
+        this._map.removeLayer(this.geocodeMarker)
       }
       this.input.select()
     },
@@ -160,7 +158,7 @@ const factory = function factoryFunc (L) {
           L.DomEvent.preventDefault(e)
       }
     },
-    clearResults () {
+    clearResults: function () {
       while (this.alts.firstChild) {
         this.alts.removeChild(this.alts.firstChild)
       }
@@ -208,10 +206,10 @@ const factory = function factoryFunc (L) {
     },
     markGeocode: function (feature) {
       var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
-      this.map.setView(latlng, 14)
+      this._map.setView(latlng, 14)
       this.geocodeMarker = new L.Marker(latlng)
         .bindPopup(feature.properties.label)
-        .addTo(this.map)
+        .addTo(this._map)
         .openPopup()
     }
   })
