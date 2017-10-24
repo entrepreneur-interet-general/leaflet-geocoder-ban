@@ -58,7 +58,7 @@ var options = {
 var geocoder = L.geocoderBAN(options).addTo(map)
 ```
 
-## custom markgeocode function 
+# Custom markgeocode function 
 When you select a result on the geocoder, it calls a default `markGeocode` function. If you want to call a custom function, override it. It receives as argument the result given by the BAN API as described [here](https://adresse.data.gouv.fr/api)
 
 ```javascript
@@ -73,5 +73,24 @@ geocoder.markGeocode = function (feature) {
     .setContent(feature.properties.label)
     .openOn(map)
   }
+})
+```
+
+# Methods
+
+| method           |    description              |
+|------------------|-----------------------------|
+| collapse()       | collapses the geocoder      |
+| expand()         | expands the geocoder        |
+| toggle()         | toggles between expanded and collapsed state |
+| remove()         | removes the geocoder       |
+
+## example
+
+```javascript
+var geocoder = L.geocoderBAN().addTo(map)
+
+map.on('contextmenu', function () {
+  geocoder.toggle()
 })
 ```
