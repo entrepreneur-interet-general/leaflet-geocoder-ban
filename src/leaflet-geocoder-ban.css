@@ -21,6 +21,15 @@
     background-position: center;
 }
 
+.leaflet-control-geocoder-ban-icon:focus {
+    outline: None;
+}
+
+.leaflet-touch .leaflet-control-geocoder-ban-icon {
+    width: 30px;
+    height: 30px;
+}
+
 .leaflet-control-geocoder-ban-form {
     display: none;
     vertical-align: middle;
@@ -39,6 +48,10 @@
     border: 0;
     background-color: transparent;
     width: 246px;
+}
+
+.leaflet-control-geocoder-ban-form input:focus {
+    outline: None;
 }
 
 .leaflet-control-geocoder-ban-alternatives {
