@@ -1,7 +1,7 @@
 # leaflet-geocoder-ban [![NPM version](https://img.shields.io/npm/v/leaflet-geocoder-ban.svg)](https://www.npmjs.com/package/leaflet-geocoder-ban) ![Leaflet 1.0.0 compatible!](https://img.shields.io/badge/Leaflet%201.0.0-%E2%9C%93-1EB300.svg?style=flat)
 A simple Leaflet Plugin to add a geocoding control to your map, powered by the french [BAN](https://adresse.data.gouv.fr/) (Base Adresse Nationale) API. This API only covers French addresses.
 
-Check the online [demo](https://entrepreneur-interet-general.github.io/leaflet-geocoder-ban/demo/).
+Check the online demos : [demo1](https://entrepreneur-interet-general.github.io/leaflet-geocoder-ban/demo/demo_control.html) and [demo2](https://entrepreneur-interet-general.github.io/leaflet-geocoder-ban/demo/demo_search_bar.html).
 
 # Installation
 
@@ -15,7 +15,10 @@ or
 # Usage
 First, load the leaflet files as usual.
 
-Then, load the two leaflet-geocoder-ban files located in the src folder :
+Then, load the two leaflet-geocoder-ban files : the js and the css.
+
+They are located in the src folder and minified versions are provided in the dist folder. You can load them directly in your html page :
+
 ```html
 <script src="leaflet-geocoder-ban.js"></script>
 <link rel="stylesheet" href="leaflet-geocoder-ban.css">
@@ -46,6 +49,7 @@ You can pass some options to the `geocoderBAN()` function:
 | autofocus                  | boolean     | true         | If the initial state of the control is expanded, choose wether the input is autofocused on page load|
 | serviceUrl                 | string      | 'https://api-adresse.data.gouv.fr/search/' | API of the url
 | minIntervalBetweenRequests |integer      | 250          | delay in milliseconds between two API calls made by the geocoder |
+| style                      | string      | 'control'    | style of the geocoder, either 'control' or 'searchBar'. See the two demos page. |
 
 ## example
 
@@ -80,10 +84,15 @@ geocoder.markGeocode = function (feature) {
 
 | method           |    description              |
 |------------------|-----------------------------|
+| remove()         | removes the geocoder       |
+
+Those methods are only available for the 'control' style (and not for the 'searchBar' style):
+
+| method           |    description              |
+|------------------|-----------------------------|
 | collapse()       | collapses the geocoder      |
 | expand()         | expands the geocoder        |
 | toggle()         | toggles between expanded and collapsed state |
-| remove()         | removes the geocoder       |
 
 ## example
 
@@ -93,4 +102,14 @@ var geocoder = L.geocoderBAN().addTo(map)
 map.on('contextmenu', function () {
   geocoder.toggle()
 })
+```
+
+# Customize the search bar look
+Customization of the search bar CSS is available through the searchBar class. For example :
+
+```css
+.searchBar {
+  border: 1px solid red !important;
+  max-width: 500px;
+}
 ```

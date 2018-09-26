@@ -20,6 +20,7 @@ const factory = function factoryFunc (L) {
   L.GeocoderBAN = L.Control.extend({
     options: {
       position: 'topleft',
+      style: 'control',
       placeholder: 'adresse',
       resultsNumber: 7,
       collapsed: true,
@@ -41,42 +42,59 @@ const factory = function factoryFunc (L) {
       var icon = this.icon = L.DomUtil.create('button', className + '-icon', container)
       var form = this.form = L.DomUtil.create('div', className + '-form', container)
       var input
-
+      
       map.on('click', this.collapseHack, this)
-
+      
       icon.innerHTML = '&nbsp;'
       icon.type = 'button'
-
+      
       input = this.input = L.DomUtil.create('input', '', form)
       input.type = 'text'
       input.placeholder = this.options.placeholder
-
+      
       this.alts = L.DomUtil.create('ul',
-        className + '-alternatives ' + className + '-alternatives-minimized',
-        container)
-
+      className + '-alternatives ' + className + '-alternatives-minimized',
+      container)
+      
       L.DomEvent.on(icon, 'click', function (e) {
         this.toggle()
         L.DomEvent.preventDefault(e)
       }, this)
       L.DomEvent.addListener(input, 'keyup', this.keyup, this)
-
+      
       L.DomEvent.disableScrollPropagation(container)
       L.DomEvent.disableClickPropagation(container)
-
+      
       if (!this.options.collapsed) {
         this.expand()
         if (this.options.autofocus) {
           setTimeout(function () { input.focus() }, 250)
         }
       }
-      return container
+      if (this.options.style === 'searchBar') {
+        L.DomUtil.addClass(container, 'searchBar')
+        var rootEl = document.getElementsByClassName('leaflet-control-container')[0]
+        rootEl.appendChild(container)
+        return L.DomUtil.create('div', 'hidden')
+      } else {
+        return container
+      }
     },
-    toggle: function () {
-      if (L.DomUtil.hasClass(this.container, 'leaflet-control-geocoder-ban-expanded')) {
+    minimizeControl() {
+      if (this.options.style === 'control') {
         this.collapse()
       } else {
-        this.expand()
+        // for the searchBar: only hide results, not the bar
+        L.DomUtil.addClass(this.alts, 'leaflet-control-geocoder-ban-alternatives-minimized')
+      }
+    },
+    toggle: function () {
+      if (this.style != 'searchBar') {
+        if (L.DomUtil.hasClass(this.container, 'leaflet-control-geocoder-ban-expanded')) {
+          this.collapse()
+        } else {
+          this.expand()
+        }
       }
     },
     expand: function () {
@@ -94,7 +112,7 @@ const factory = function factoryFunc (L) {
     collapseHack: function (e) {
       // leaflet bug (see #5507) before v1.1.0 that converted enter keypress to click.
       if (e.originalEvent instanceof MouseEvent) {
-        this.collapse()
+        this.minimizeControl()
       }
     },
     moveSelection: function (direction) {
@@ -120,7 +138,7 @@ const factory = function factoryFunc (L) {
       switch (e.keyCode) {
         case 27:
           // escape
-          this.collapse()
+          this.minimizeControl()
           L.DomEvent.preventDefault(e)
           break
         case 38:
@@ -182,7 +200,7 @@ const factory = function factoryFunc (L) {
       a.innerHTML = '<strong>' + feature.properties.label + '</strong>, ' + feature.properties.context
       li.geocodedFeatures = feature
       var clickHandler = function (e) {
-        this.collapse()
+        this.minimizeControl()
         this.geocodeResult(feature)
       }
       var mouseOverHandler = function (e) {
@@ -201,7 +219,7 @@ const factory = function factoryFunc (L) {
       return li
     },
     geocodeResult: function (feature) {
-      this.collapse()
+      this.minimizeControl()
       this.markGeocode(feature)
     },
     markGeocode: function (feature) {

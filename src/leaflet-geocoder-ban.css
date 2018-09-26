@@ -93,3 +93,13 @@
 .leaflet-control-geocoder-ban-selected {
     background-color: rgba(0,0,255,0.2);
 }
+.hidden {
+    display: none;
+}
+
+.searchBar {
+    z-index: 1000;
+    position: relative;
+    max-width: 400px;
+    margin: 10px auto 0;
+}
