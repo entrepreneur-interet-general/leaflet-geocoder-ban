@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "babel": "babel src -d dist",
+    "minifyCSS": "cleancss -o dist/leaflet-geocoder-ban.min.css src/leaflet-geocoder-ban.css",
+    "build": "npm run babel && npm run minifyCSS"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,10 @@
     "leaflet": "^1.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.5.0",
+    "clean-css-cli": "^4.2.1",
     "standard": "^10.0.3"
   }
 }
