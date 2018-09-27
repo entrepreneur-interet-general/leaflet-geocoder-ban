@@ -5,25 +5,24 @@ Check the online demos : [demo1](https://entrepreneur-interet-general.github.io/
 
 # Installation
 
-You can either:
-* install with npm `npm install --save leaflet-geocoder-ban`
+## With NPM
+Install with npm `npm install --save leaflet-geocoder-ban`
 
-or
+and import the files :
+```
+import 'leaflet-geocoder-ban/dist/leaflet-geocoder-ban.min.css'
+import 'leaflet-geocoder-ban/dist/leaflet-geocoder-ban.js'
+```
 
-* clone the git repository
+## Manually
 
-# Usage
-First, load the leaflet files as usual.
-
-Then, load the two leaflet-geocoder-ban files : the js and the css.
-
-They are located in the src folder and minified versions are provided in the dist folder. You can load them directly in your html page :
-
+Clone the git repository or manually download the js and css files from the dist folder and load them :
 ```html
-<script src="leaflet-geocoder-ban.js"></script>
+<script src="leaflet-geocoder-ban.min.js"></script>
 <link rel="stylesheet" href="leaflet-geocoder-ban.css">
 ```
 
+# Usage
 In your javascript code, create a Leaflet map:
 ```javascript
 var map = L.map('mapid').setView([45.853459, 2.349312], 6)
@@ -36,6 +35,8 @@ And add the geocoder:
 ```javascript
 var geocoder = L.geocoderBAN().addTo(map)
 ```
+
+That's it !
 
 # Options
 You can pass some options to the `geocoderBAN()` function:
@@ -113,3 +114,5 @@ Customization of the search bar CSS is available through the searchBar class. Fo
   max-width: 500px;
 }
 ```
+
+Have a look at the [demo2](https://entrepreneur-interet-general.github.io/leaflet-geocoder-ban/demo/demo_search_bar.html) code for a more complete customization example.
