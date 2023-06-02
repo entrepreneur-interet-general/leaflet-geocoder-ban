@@ -69,16 +69,22 @@ When you select a result on the geocoder, it calls a default `markGeocode` funct
 ```javascript
 var geocoder = L.geocoderBAN({ collapsed: true }).addTo(map)
 
-geocoder.markGeocode = function (feature) {
+geocoder.markGeocode = function(feature) {
+  if (typeof myFGMarker != 'undefined') {
+    map.removeLayer(myFGMarker);
+  }
+
   var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
   map.setView(latlng, 14)
 
-  var popup = L.popup()
-    .setLatLng(latlng
-    .setContent(feature.properties.label)
-    .openOn(map)
-  }
-})
+
+  myFGMarker = new L.FeatureGroup();
+  marker = L.marker(latlng, {});
+  myFGMarker.addLayer(marker);
+  myFGMarker.addTo(map);
+
+  myFGMarker.bindPopup(feature.properties.label).openPopup();
+}
 ```
 
 # Methods
