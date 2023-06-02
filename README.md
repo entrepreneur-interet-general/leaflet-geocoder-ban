@@ -67,18 +67,19 @@ var geocoder = L.geocoderBAN(options).addTo(map)
 When you select a result on the geocoder, it calls a default `markGeocode` function. If you want to call a custom function, override it. It receives as argument the result given by the BAN API as described [here](https://adresse.data.gouv.fr/api-doc/adresse)
 
 ```javascript
-var geocoder = L.geocoderBAN({ collapsed: true }).addTo(map)
+var geocoder = L.geocoderBAN({
+    collapsed: true
+}).addTo(map)
 
-geocoder.markGeocode = function (feature) {
-  var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
-  map.setView(latlng, 14)
+geocoder.markGeocode = function(feature) {
+    var latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
+    map.setView(latlng, 14)
 
-  var popup = L.popup()
-    .setLatLng(latlng
-    .setContent(feature.properties.label)
-    .openOn(map)
-  }
-})
+    var popup = L.popup()
+        .setLatLng(latlng)
+        .setContent(feature.properties.label)
+        .openOn(map)
+}
 ```
 
 # Methods
